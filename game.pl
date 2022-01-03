@@ -22,11 +22,16 @@ currentState(S):- S = [[empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty]].
 
-showTopBoard:- nl,
+showTopBoard(S,P):- nl,
+            write('           Player '), write(P), write(' Playing'),nl, 
+            write('                                    '),nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
-            currentState(S),
-            showArcade(1,S).
+            showArcade(1,S),nl,
+            rowSelection(Row),
+            columnSelection(Column),
+            changeBoard(S,SNew,Row,Column,p1),
+            showTopBoard(SNew,P).
 
 showArcade(9,[]).
 showArcade(N,[H|T]):- alphabet(N,A),write(' '),write(A),write(' | '),
@@ -53,6 +58,30 @@ showChar(C,empty):- C = ' '.
 showChar(C,p1):- C = 'X'.
 showChar(C,p2):- C = 'O'.
 
+%Row or Column Selection
+
+rowSelection(Row):- write('Insert Row '),
+                    read(Input),
+                    (alphabet(R,Input) ->
+                        Row = R;
+                        rowSelection(Row)
+                    ).
+
+columnSelection(Column):- write('Insert Column '),
+                          read(Input),
+                          Column is Input.
+
+%Replace Elements
+
+changeList([_H|T],[Value|T],1,Value).
+changeList([H|T],[H|T2],Column,Value):- Column > 1,
+                                        Column2 is Column - 1,
+                                        changeList(T,T2,Column2,Value).
+
+changeBoard([H|T],[H2|T],1,Column,Value):- changeList(H,H2,Column,Value).
+changeBoard([H|T],[H|T2],Row,Column,Value):- Row > 1,
+                                             Row2 is Row - 1,
+                                             changeBoard(T,T2,Row2,Column,Value).
 
 %Aesthetic
 
@@ -60,8 +89,10 @@ menu:- showMenu,
        read(Input),
        optionMenu(Input).
 
-optionMenu(1):- showTopBoard.
+optionMenu(1):- currentState(S), showTopBoard(S,1).
 optionMenu(2):- false.
+optionMenu(3):- false.
+optionMenu(4):- false.
 
 showMenu:- nl,nl, 
                 write(' ----------------------------------------------------------------'),nl,
@@ -73,8 +104,10 @@ showMenu:- nl,nl,
                 write('|                                                                |'),nl,
                 write('|                                                                |'),nl,
                 write('|                                                                |'),nl,
-                write('|                      1) Play the Game                          |'),nl,
-                write('|                      2) Exit                                   |'),nl,
+                write('|                      1) Player vs Player                       |'),nl,
+                write('|                      2) Player vs Computer                     |'),nl,
+                write('|                      3) Computer vs Computer                   |'),nl,
+                write('|                      4) Exit                                   |'),nl,
                 write('|                                                                |'),nl,
                 write('|                      --INSERT OPTION--                         |'),nl,
                 write('|                                                                |'),nl,
