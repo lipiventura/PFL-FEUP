@@ -22,19 +22,34 @@ currentState(S):- S = [[empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty]].
 
-showTopBoard(S,P):- nl,
-            write('           Player '), write(P), write(' Playing'),nl, 
+
+showTopBoard(S,1):- nl,
+            write('           Player '), write(1), write(' Playing'),nl, 
             write('                                    '),nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
-            rowSelection(Row),
-            columnSelection(Column),
-            changeBoard(S,SNew,Row,Column,p1),
-            showTopBoard(SNew,P).
+            doChanging(S,SNew,p1),
+            showTopBoard(SNew,2).
+
+showTopBoard(S,2):- nl,
+            write('           Player '), write(2), write(' Playing'),nl, 
+            write('                                    '),nl,
+            write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
+            write('---|---|---|---|---|---|---|---|---|'),nl,
+            showArcade(1,S),nl,
+            doChanging(S,SNew,p2),
+            showTopBoard(SNew,1).
+
+doChanging(S,SNew,P):- repeat,
+                       rowSelection(Row),
+                       columnSelection(Column),
+                       checkAll(S,Row,Column,p1),
+                       changeBoard(S,SNew,Row,Column,P).
+
 
 showArcade(9,[]).
-showArcade(N,[H|T]):- alphabet(N,A),write(' '),write(A),write(' | '),
+showArcade(N,[H|T]):- alphabet(A,N),write(' '),write(A),write(' | '),
                       showLine(H),
                       nl,write('___|___|___|___|___|___|___|___|___|'),nl,
                       N1 is N + 1,
@@ -45,14 +60,14 @@ showLine([H|T]):- showChar(C,H),
                   write(C),write(' | '),
                   showLine(T).
 
-alphabet(1,A):- A = 'A'.
-alphabet(2,A):- A = 'B'.
-alphabet(3,A):- A = 'C'.
-alphabet(4,A):- A = 'D'.
-alphabet(5,A):- A = 'E'.
-alphabet(6,A):- A = 'F'.
-alphabet(7,A):- A = 'G'.
-alphabet(8,A):- A = 'H'.
+alphabet(A,1):- A = 'a'.
+alphabet(A,2):- A = 'b'.
+alphabet(A,3):- A = 'c'.
+alphabet(A,4):- A = 'd'.
+alphabet(A,5):- A = 'e'.
+alphabet(A,6):- A = 'f'.
+alphabet(A,7):- A = 'g'.
+alphabet(A,8):- A = 'h'.
 
 showChar(C,empty):- C = ' '.
 showChar(C,p1):- C = 'X'.
@@ -62,18 +77,21 @@ showChar(C,p2):- C = 'O'.
 
 rowSelection(Row):- write('Insert Row '),
                     read(Input),
-                    (alphabet(R,Input) ->
-                        Row = R;
-                        rowSelection(Row)
-                    ).
+                    (alphabet(Input,R) ->
+                    Row is R;
+                    nl,write('Insert Row Again (Correctly) '),
+                    rowSelection(Row)).
 
 columnSelection(Column):- write('Insert Column '),
                           read(Input),
-                          Column is Input.
+                          ((Input >= 1, Input =< 8) ->
+                          Column is Input;
+                          nl,write('Insert Column Again (Correctly) '),
+                          columnSelection(Column)).
 
 %Replace Elements
 
-changeList([_H|T],[Value|T],1,Value).
+changeList([H|T],[Value|T],1,Value) :- H = empty.
 changeList([H|T],[H|T2],Column,Value):- Column > 1,
                                         Column2 is Column - 1,
                                         changeList(T,T2,Column2,Value).
@@ -82,6 +100,46 @@ changeBoard([H|T],[H2|T],1,Column,Value):- changeList(H,H2,Column,Value).
 changeBoard([H|T],[H|T2],Row,Column,Value):- Row > 1,
                                              Row2 is Row - 1,
                                              changeBoard(T,T2,Row2,Column,Value).
+
+%Rules
+
+getRCs(Row,Row2,Row3,Column,Column2,Column3):- Row2 is Row + 1,
+                                                Row3 is Row - 1,
+                                                Column2 is Column + 1,
+                                                Column3 is Column - 1.
+
+checkAll(S,1,1,Value):- checkBoard(S,1,2,Value), checkBoard(S,2,1,Value).
+checkAll(S,1,8,Value):- checkBoard(S,1,7,Value), checkBoard(S,2,8,Value).
+checkAll(S,8,1,Value):- checkBoard(S,8,2,Value), checkBoard(S,7,1,Value).
+checkAll(S,8,8,Value):- checkBoard(S,8,7,Value), checkBoard(S,7,8,Value).
+
+checkAll(S,1,Column,Value):- Column2 is Column + 1, Column3 is Column - 1,
+                             checkBoard(S,2,Column,Value),checkBoard(S,1,Column2,Value),checkBoard(S,1,Column3,Value).
+checkAll(S,8,Column,Value):- Column2 is Column + 1, Column3 is Column - 1,
+                             checkBoard(S,7,Column,Value),checkBoard(S,8,Column2,Value),checkBoard(S,8,Column3,Value).
+checkAll(S,Row,1,Value):- Row2 is Row + 1, Row3 is Row - 1,
+                          checkBoard(S,Row,2,Value),checkBoard(S,Row2,1,Value),checkBoard(S,Row3,1,Value).
+checkAll(S,Row,8,Value):- Row2 is Row + 1, Row3 is Row - 1,
+                          checkBoard(S,Row,7,Value),checkBoard(S,Row2,8,Value),checkBoard(S,Row3,8,Value).
+                        
+checkAll(S,Row,Column,Value):- Row2 is Row + 1,Row3 is Row - 1,Column2 is Column + 1,Column3 is Column - 1,
+                               checkBoard(S,Row2,Column,p1),
+                               checkBoard(S,Row3,Column,p1),
+                               checkBoard(S,Row,Column2,p1),
+                               checkBoard(S,Row,Column3,p1).
+
+checkList([H|T],1,Value):- \+ H = Value.
+checkList([H|T],Column,Value):- Column > 1,
+                                     Column2 is Column - 1,
+                                     checkList(T,Column2,Value).
+
+checkBoard([H|T],1,Column,Value):- checkList(H,Column,Value).
+checkBoard([H|T],Row,Column,Value):- Row > 1,
+                                     Row2 is Row - 1,
+                                     checkBoard(T,Row2,Column,Value).
+
+%consult('/Users/diogofilipe/Desktop/PFL/PROLOG/game.pl'). 
+
 
 %Aesthetic
 
