@@ -29,6 +29,7 @@ showTopBoard(S,1):- nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
+            %wonGame(S,P,P2),
             doChanging(S,SNew,p1,p2),
             showTopBoard(SNew,2).
 
@@ -38,8 +39,16 @@ showTopBoard(S,2):- nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
+            %wonGame(S,P,P2),
             doChanging(S,SNew,p2,p1),
             showTopBoard(SNew,1).
+
+wonGame(S,P,P2):- playableRow(S,1,1,P,P2,0,N2),
+                  N2 > 0;
+                  playableRow(S,1,1,P,P2,0,N2),
+                  N2 =< 0,
+                  nl,write('Player '),write(P),write(' Won!'),nl.
+
 
 doChanging(S,SNew,P,P2):- repeat,
                        rowSelection(Row),
@@ -140,6 +149,27 @@ checkBoard([H|T],1,Column,Value):- checkList(H,Column,Value).
 checkBoard([H|T],Row,Column,Value):- Row > 1,
                                      Row2 is Row - 1,
                                      checkBoard(T,Row2,Column,Value).
+
+
+check(S,Row,Column,P1,P2):- masterRule(S,Row,Column,P1,P2),
+                            checkBoard(S,Row,Column,P1),
+                            checkBoard(S,Row,Column,P2).
+
+playableColumn(S,Row,9,P1,P2,N1,N2).
+playableColumn(S,Row,Column,P1,P2,N1,N2):- check(S,Row,Column,P1,P2),
+                                     Column1 is Column + 1,
+                                     N3 is N1 + 1,
+                                     playableColumn(S,Row,Column1,P1,P2,N3,N3);
+                                     \+ check(S,Row,Column,P1,P2),
+                                     Column1 is Column + 1,
+                                     playableColumn(S,Row,Column1,P1,P2,N1,N2).
+
+
+playableRow(S,8,Column,P1,P2,N1,N2):- playableColumn(S,Row,Column,P1,P2,N1,N2).
+playableRow(S,Row,Column,P1,P2,N1,N2):- playableColumn(S,Row,Column,P1,P2,N1,N2),
+                                     Row1 is Row + 1,
+                                     N2 is N1 + 1,
+                                     playableRow(S,Row1,Column,P1,P2,N1,N2).
 
 %consult('/Users/diogofilipe/Desktop/PFL/PROLOG/game.pl'). 
 
