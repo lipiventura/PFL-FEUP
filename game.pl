@@ -29,7 +29,7 @@ showTopBoard(S,1):- nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
-            doChanging(S,SNew,p1),
+            doChanging(S,SNew,p1,p2),
             showTopBoard(SNew,2).
 
 showTopBoard(S,2):- nl,
@@ -38,14 +38,17 @@ showTopBoard(S,2):- nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
-            doChanging(S,SNew,p2),
+            doChanging(S,SNew,p2,p1),
             showTopBoard(SNew,1).
 
-doChanging(S,SNew,P):- repeat,
+doChanging(S,SNew,P,P2):- repeat,
                        rowSelection(Row),
                        columnSelection(Column),
-                       checkAll(S,Row,Column,p1),
+                       masterRule(S,Row,Column,P,P2),
                        changeBoard(S,SNew,Row,Column,P).
+
+masterRule(S,Row,Column,P,P2):- checkAll(S,Row,Column,P2);
+                                \+ checkAll(S,Row,Column,P2), \+ checkAll(S,Row,Column,P).
 
 
 showArcade(9,[]).
@@ -123,10 +126,10 @@ checkAll(S,Row,8,Value):- Row2 is Row + 1, Row3 is Row - 1,
                           checkBoard(S,Row,7,Value),checkBoard(S,Row2,8,Value),checkBoard(S,Row3,8,Value).
                         
 checkAll(S,Row,Column,Value):- Row2 is Row + 1,Row3 is Row - 1,Column2 is Column + 1,Column3 is Column - 1,
-                               checkBoard(S,Row2,Column,p1),
-                               checkBoard(S,Row3,Column,p1),
-                               checkBoard(S,Row,Column2,p1),
-                               checkBoard(S,Row,Column3,p1).
+                               checkBoard(S,Row2,Column,Value),
+                               checkBoard(S,Row3,Column,Value),
+                               checkBoard(S,Row,Column2,Value),
+                               checkBoard(S,Row,Column3,Value).
 
 checkList([H|T],1,Value):- \+ H = Value.
 checkList([H|T],Column,Value):- Column > 1,
