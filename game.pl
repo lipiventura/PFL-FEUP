@@ -29,7 +29,7 @@ showTopBoard(S,1):- nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
-            %wonGame(S,P,P2),
+            gameNotOver(S,p1,p2),
             doChanging(S,SNew,p1,p2),
             showTopBoard(SNew,2).
 
@@ -39,16 +39,34 @@ showTopBoard(S,2):- nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
-            %wonGame(S,P,P2),
+            gameNotOver(S,p2,p1),
             doChanging(S,SNew,p2,p1),
             showTopBoard(SNew,1).
 
-wonGame(S,P,P2):- playableRow(S,1,1,P,P2,N1),
-                  N1 > 0;
-                  playableRow(S,1,1,P,P2,N1),
-                  N1 is 0,
-                  nl,write('Player '),write(P),write(' Won!'),nl.
+playerID(p1,1).
+playerID(p2,2).
 
+gameNotOver(S,P,P2):- playableColumn(S,1,1,P,P2,0,N2),
+                      playableColumn(S,2,1,P,P2,0,N3),
+                      playableColumn(S,3,1,P,P2,0,N4),
+                      playableColumn(S,4,1,P,P2,0,N5),
+                      playableColumn(S,5,1,P,P2,0,N6),
+                      playableColumn(S,6,1,P,P2,0,N7),
+                      playableColumn(S,7,1,P,P2,0,N8),
+                      playableColumn(S,8,1,P,P2,0,N9),
+                      N10 is N2 + N3, N11 is N10 + N4,
+                      N12 is N11 + N5,N13 is N12 + N6,
+                      N14 is N13 + N7,N15 is N14 + N8,
+                      X is N15 + N9,handleN(S,P2,X).
+
+handleN(S,P,0):- nl,write('               Game Over!                 '),nl,
+               whoWon(S,P),
+               nl,play.
+
+whoWon(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               ').
+whoWon(S,P):- nl,write('              Player '),playerID(P,N),write(N),write(' Won!             ').
+
+handleN(S,P,X):- true.               
 
 doChanging(S,SNew,P,P2):- repeat,
                        rowSelection(Row),
@@ -165,15 +183,17 @@ playableColumn(S,Row,Column,P1,P2,N1,N2):- check(S,Row,Column,P1,P2),
                                      Column1 is Column + 1,
                                      playableColumn(S,Row,Column1,P1,P2,N1,N2).
 
-playableRow(S,9,Column,P1,P2,N1,N1).
-playableRow(S,9,Column,P1,P2,N1,N2):- playableRow(S,9,Column,P1,P2,N1,N1).
-playableRow(S,Row,Column,P1,P2,N1,N2):- playableColumn(S,Row,Column,P1,P2,N1,N2),
-                                        Row1 is Row + 1,
-                                        playableRow(S,Row1,Column,P1,P2,N2,N2).
+emptyColumn(S,Row,9,Value).
+emptyColumn(S,Row,Column,Value):- checkBoard(S,Row,Column,Value),
+                                  Column1 is Column + 1,
+                                  emptyColumn(S,Row,Column1,Value).
+
+emptyRow(S,9,Column,Value).
+emptyRow(S,Row,Column,Value):- emptyColumn(S,Row,Column,Value),
+                               Row1 is Row + 1,
+                               emptyRow(S,Row1,Column,Value).
 
 %consult('/Users/diogofilipe/Desktop/PFL/PROLOG/game.pl'). 
-
-%playableRow([[p1,p1,p1,p1,empty,p1,p1,p1],[empty,empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty,empty]],1,1,p2,p1,0,X).
 
 
 %Aesthetic
