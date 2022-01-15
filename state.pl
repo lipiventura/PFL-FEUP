@@ -65,6 +65,10 @@ showChar(C,p2):- C = 'O'.
 playerID(p1,1).
 playerID(p2,2).
 
+getPlayer(N,Pl):- 0 is N mod 2, Pl = 2.
+getPlayer(N,Pl):- 1 is N mod 2, Pl = 1.
+
+
 gameNotOver(S,P,P2):- playableColumn(S,1,1,P,P2,0,N2),
                       playableColumn(S,2,1,P,P2,0,N3),
                       playableColumn(S,3,1,P,P2,0,N4),
