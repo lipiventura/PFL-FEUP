@@ -5,6 +5,8 @@
 :-ensure_loaded(state).
 :-ensure_loaded(menu).
 :-ensure_loaded(logic).
+:-ensure_loaded(pieces).
+:-ensure_loaded(ai).
 
 play:- menu.
 

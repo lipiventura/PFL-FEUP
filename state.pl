@@ -49,24 +49,10 @@ showLine([H|T]):- showChar(C,H),
                   write(C),write(' | '),
                   showLine(T).
 
-alphabet(A,1):- A = 'a'.
-alphabet(A,2):- A = 'b'.
-alphabet(A,3):- A = 'c'.
-alphabet(A,4):- A = 'd'.
-alphabet(A,5):- A = 'e'.
-alphabet(A,6):- A = 'f'.
-alphabet(A,7):- A = 'g'.
-alphabet(A,8):- A = 'h'.
 
-showChar(C,empty):- C = ' '.
-showChar(C,p1):- C = 'X'.
-showChar(C,p2):- C = 'O'.
 
 playerID(p1,1).
 playerID(p2,2).
-
-getPlayer(N,Pl):- 0 is N mod 2, Pl = 2.
-getPlayer(N,Pl):- 1 is N mod 2, Pl = 1.
 
 
 gameNotOver(S,P,P2):- playableColumn(S,1,1,P,P2,0,N2),
@@ -97,5 +83,3 @@ doChanging(S,SNew,P,P2):- repeat,
                        masterRule(S,Row,Column,P,P2),
                        changeBoard(S,SNew,Row,Column,P).
 
-masterRule(S,Row,Column,P,P2):- checkAll(S,Row,Column,P2);
-                                \+ checkAll(S,Row,Column,P2), \+ checkAll(S,Row,Column,P).

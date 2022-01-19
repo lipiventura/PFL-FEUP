@@ -28,11 +28,6 @@ changeBoard([H|T],[H|T2],Row,Column,Value):- Row > 1,
 
 %Rules
 
-getRCs(Row,Row2,Row3,Column,Column2,Column3):- Row2 is Row + 1,
-                                                Row3 is Row - 1,
-                                                Column2 is Column + 1,
-                                                Column3 is Column - 1.
-
 checkAll(S,1,1,Value):- checkBoard(S,1,2,Value), checkBoard(S,2,1,Value).
 checkAll(S,1,8,Value):- checkBoard(S,1,7,Value), checkBoard(S,2,8,Value).
 checkAll(S,8,1,Value):- checkBoard(S,8,2,Value), checkBoard(S,7,1,Value).
@@ -68,6 +63,9 @@ check(S,Row,Column,P1,P2):- masterRule(S,Row,Column,P1,P2),
                             checkBoard(S,Row,Column,P1),
                             checkBoard(S,Row,Column,P2).
 
+
+
+
 playableColumn(S,Row,9,P1,P2,N1,N1).
 playableColumn(S,Row,9,P1,P2,N1,N2):- playableColumn(S,Row,9,P1,P2,N1,N1).
 playableColumn(S,Row,Column,P1,P2,N1,N2):- check(S,Row,Column,P1,P2),
@@ -87,3 +85,6 @@ emptyRow(S,9,Column,Value).
 emptyRow(S,Row,Column,Value):- emptyColumn(S,Row,Column,Value),
                                Row1 is Row + 1,
                                emptyRow(S,Row1,Column,Value).
+
+masterRule(S,Row,Column,P,P2):- checkAll(S,Row,Column,P2);
+                                \+ checkAll(S,Row,Column,P2), \+ checkAll(S,Row,Column,P).
