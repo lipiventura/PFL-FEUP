@@ -23,11 +23,15 @@ The game ends when it is impossible for a player to place a piece anywhere on th
 We represent the game state with a list of lists that have the same dimensions of the board Mitozo in played in (8x8).
 
 Each row of the board has three different states.
-It can be empty, wich means there are no pieces on that square at the moment, a p1 that represents a white piece (player 1) and a p2 that represents the black piece (player 2).
+It can be empty, wich means there are no pieces on that square at the moment, a p1 that represents player 1 and a p2 that represents player 2.
 
 In the next three subsections we have the internal state representation ate different moments of the game.
 
 #### Initial Representation
+
+The predicate responsible for the drawing of the board is called display_game(GameState) calling another predicate to draw every line of the board. Mitozo is a game played only in an eight by eight board, so we don't have the need to have varying sizes of the board.
+
+![display_game](https://user-images.githubusercontent.com/39671616/150494666-90d954f8-5db3-40b9-aa90-7bc8cb83e2a3.PNG)
 
 The initial board is a list of empty cells as there are no pieces placed at the beggining of the game.
 
@@ -50,7 +54,7 @@ In this game state, player 2 won by making sure player 1 has no more legal moves
 
 
 
-## Visualization of the Game State
+### Visualization of the Game State
 
 The visualization of the game state is made using ASCII characters printed on the console.
 The empty cells in the code are represented by an empty cell, player 1 pices by an X and player 2 pieces by an O.
@@ -75,3 +79,25 @@ The intermidiate state we chose is seen by the user as follows.
 The game ended with the victory of player 2 and a message appears so the players can know the game ended and who won.
 
 ![image](https://user-images.githubusercontent.com/39671616/148706111-d2d41cf4-3c49-40b2-8284-b4646ba09c68.png)
+
+### How to Move
+
+### End of Game
+
+Mitozo ends when the board is full (draw) or a player cannot make a move on his turn. We mplemented a predicate game_over(GameState, Player) that is called when there are no more moves for that player to exit the game loop and display a Game Over message. This predicate is as follows.
+
+![game_over](https://user-images.githubusercontent.com/39671616/150495941-65767106-f62b-478c-9975-4d943f28e295.PNG)
+
+We keep the game loop going while there are still moves left to play using another preicate called gameNotOver(GameState, Player, Player). When this predicate returns false, the game loop stops and calls the predicate game_over via a handler.
+
+![gameNotOver](https://user-images.githubusercontent.com/39671616/150496717-9735d2f7-47d7-4df6-ba00-5b2e5e58e13a.PNG)
+
+### List of Valid Moves
+
+### Evaluation of the Game State
+
+### Computer's Move
+
+## Conclusion
+
+
