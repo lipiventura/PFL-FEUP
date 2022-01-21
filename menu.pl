@@ -3,7 +3,7 @@ menu:- showMenu,
        optionMenu(Input).
 
 optionMenu(1):- currentState(S), showTopBoard(S,1).
-optionMenu(2):- false.
+optionMenu(2):- currentState(S), showTopBoardOpt2(S,1).
 optionMenu(3):- false.
 optionMenu(4):- false.
 
