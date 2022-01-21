@@ -29,6 +29,9 @@ final_state(S):- S = [[p1,p1,p2,p2,p2,empty,empty,empty],
 display_game(S):-
         showTopBoard(S,1).
 
+display_game_AI(S):-
+        showTopBoardOpt2(S,1).
+
 
 showTopBoard(S,1):- nl,
             write('           Player '), write(1), write(' Playing'),nl, 
