@@ -10,4 +10,4 @@
 
 play:- menu.
 
-%consult('/Users/diogofilipe/Desktop/PFL/PROLOG/game.pl'). 
+%consult('/Users/diogofilipe/Desktop/PFL-FEUP/game.pl').   

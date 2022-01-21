@@ -2,8 +2,9 @@ menu:- showMenu,
        read(Input),
        optionMenu(Input).
 
+
 optionMenu(1):- initial_state(S), display_game(S).
-optionMenu(2):- false.
+optionMenu(2):- initial_state(S), showTopBoardOpt2(S,1).
 optionMenu(3):- false.
 optionMenu(4):- demoMenu.
 optionMenu(5):- false.

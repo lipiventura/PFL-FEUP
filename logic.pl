@@ -88,3 +88,8 @@ emptyRow(S,Row,Column,Value):- emptyColumn(S,Row,Column,Value),
 
 masterRule(S,Row,Column,P,P2):- checkAll(S,Row,Column,P2);
                                 \+ checkAll(S,Row,Column,P2), \+ checkAll(S,Row,Column,P).
+
+
+
+
+

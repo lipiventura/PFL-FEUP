@@ -85,8 +85,11 @@ handleN(S,P,0):- nl,write('               Game Over!                 '),nl,
                game_over(S,P),
                nl,play.
 
+
 game_over(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               ').
+game_over(S,c):- nl,write('              Computer Won!             ').
 game_over(S,P):- nl,write('              Player '),playerID(P,N),write(N),write(' Won!             ').
+
 
 handleN(S,P,X):- true.               
 
@@ -96,3 +99,23 @@ doChanging(S,SNew,P,P2):- repeat,
                        masterRule(S,Row,Column,P,P2),
                        changeBoard(S,SNew,Row,Column,P).
 
+
+
+showTopBoardOpt2(S,1):- nl,
+            write('           Player '), write(1), write(' Playing'),nl, 
+            write('                                    '),nl,
+            write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
+            write('---|---|---|---|---|---|---|---|---|'),nl,
+            showArcade(1,S),nl,
+            gameNotOver(S,p1,p2),
+            doChanging(S,SNew,p1,p2),
+            showTopBoardOpt2(SNew,2).
+
+showTopBoardOpt2(S,2):- nl,
+            write('           Computer Playing'),nl, 
+            write('                                    '),nl,
+            write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
+            write('---|---|---|---|---|---|---|---|---|'),nl,
+            showArcade(1,S),nl,
+            listOfAll(S,SNew,p2,p1,X),
+            showTopBoardOpt2(SNew,1).
