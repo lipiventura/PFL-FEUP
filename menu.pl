@@ -4,7 +4,7 @@ menu:- showMenu,
 
 
 optionMenu(1):- initial_state(S), display_game(S).
-optionMenu(2):- initial_state(S), showTopBoardOpt2(S,1).
+optionMenu(2):- initial_state(S), display_game_AI(S).
 optionMenu(3):- false.
 optionMenu(4):- demoMenu.
 optionMenu(5):- false.
