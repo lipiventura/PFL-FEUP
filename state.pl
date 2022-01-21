@@ -1,13 +1,4 @@
-initial([empty,empty,empty,empty,empty,empty,empty,empty],
-        [empty,empty,empty,empty,empty,empty,empty,empty],
-        [empty,empty,empty,empty,empty,empty,empty,empty],
-        [empty,empty,empty,empty,empty,empty,empty,empty],
-        [empty,empty,empty,empty,empty,empty,empty,empty],
-        [empty,empty,empty,empty,empty,empty,empty,empty],
-        [empty,empty,empty,empty,empty,empty,empty,empty],
-        [empty,empty,empty,empty,empty,empty,empty,empty]).
-
-currentState(S):- S = [[empty,empty,empty,empty,empty,empty,empty,empty],
+initial_state(S):- S = [[empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty],
@@ -15,6 +6,28 @@ currentState(S):- S = [[empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty],
         [empty,empty,empty,empty,empty,empty,empty,empty]].
+
+intermidiate_state(S):- S = [[p1,p1,p2,empty,empty,empty,empty,empty],
+        [p1,p2,p2,empty,empty,empty,p2,empty],
+        [empty,p2,p2,p2,empty,empty,p2,empty],
+        [p1,p1,empty,empty,empty,empty,empty,empty],
+        [empty,p1,empty,empty,empty,empty,empty,empty],
+        [p1,empty,p1,empty,empty,empty,empty,empty],
+        [empty,p1,empty,empty,p1,empty,p1,empty],
+        [p2,empty,empty,empty,empty,empty,empty,p2]].
+
+final_state(S):- S = [[p1,p1,p2,p2,p2,empty,empty,empty],
+        [p1,p2,p2,p2,p2,p2,p2,empty],
+        [p2,p2,p2,p2,p2,p2,p2,empty],
+        [p1,p1,p1,p1,p1,p1,p2,empty],
+        [p1,p1,p2,p2,p2,p1,p2,empty],
+        [p1,p1,p1,p2,p1,p2,p1,p2],
+        [empty,p1,p1,p1,p1,p1,p1,p2],
+        [p2,p1,p1,p2,p1,p1,p1,p2]].
+
+
+display_game(S):-
+        showTopBoard(S,1).
 
 
 showTopBoard(S,1):- nl,
@@ -69,12 +82,14 @@ gameNotOver(S,P,P2):- playableColumn(S,1,1,P,P2,0,N2),
                       X is N15 + N9,handleN(S,P2,X).
 
 handleN(S,P,0):- nl,write('               Game Over!                 '),nl,
-               whoWon(S,P),
+               game_over(S,P),
                nl,play.
 
-whoWon(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               ').
-whoWon(S,c):- nl,write('              Computer Won!             ').
-whoWon(S,P):- nl,write('              Player '),playerID(P,N),write(N),write(' Won!             ').
+
+game_over(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               ').
+game_over(S,c):- nl,write('              Computer Won!             ').
+game_over(S,P):- nl,write('              Player '),playerID(P,N),write(N),write(' Won!             ').
+
 
 handleN(S,P,X):- true.               
 
