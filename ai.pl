@@ -71,7 +71,7 @@ listOfAll(S,SNew,P,P2,X):- playableColumnAI(S,1,1,P,P2,[],L2),
                     playableColumnAI(S,8,1,P,P2,L8,L9),
                     X = L9, handleList(S,SNew,P,X).
 
-handleList(S,SNew,P,[]):- nl,write('               Game Over!                 '),nl,whoWon(S,P),nl,play.
+handleList(S,SNew,P,[]):- nl,write('               Game Over!                 '),nl,game_over(S,P),nl,play.
 handleList(S,SNew,P,[[H1|H2]|T]):-  Row is H1, Column is H2, changeBoard(S,SNew,Row,Column,P).
 
 
