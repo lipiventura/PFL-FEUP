@@ -5,7 +5,7 @@ menu:- showMenu,
 
 optionMenu(1):- final_state(S), display_game(S).
 optionMenu(2):- final_state(S), display_game_AI(S).
-optionMenu(3):- false.
+optionMenu(3):- final_state(S), display_game_only_AI(S).
 optionMenu(4):- demoMenu.
 optionMenu(5):- false.
 
