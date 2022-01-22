@@ -6,6 +6,8 @@ Diogo Martins - up201806280
 
 Manuel Moreira - up201402718
 
+Maria Francisca Almeida up201806398
+
 ## Instalation and Execution
 
 ## Game Description
@@ -99,5 +101,7 @@ We keep the game loop going while there are still moves left to play using anoth
 ### Computer's Move
 
 ## Conclusion
+The board game Mitozo was succesfully developed in the Prolog Language. We can play against another player (Player vs Player) or against the "Computer" (Player vs Computer), since an autonomous player has been implemented with dificulty levels.
+However, this work turned to be quite a challenge due to the fact that Prolog differs from the usual imperative programming. Nevertheless, we are now a step closer to become great programmers due to our incresead knowledge in the Prolog Language.
 
 
