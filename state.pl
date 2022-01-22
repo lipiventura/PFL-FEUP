@@ -85,13 +85,12 @@ gameNotOver(S,P,P2):- playableColumn(S,1,1,P,P2,0,N2),
                       X is N15 + N9,handleN(S,P2,X).
 
 handleN(S,P,0):- nl,write('               Game Over!                 '),nl,
-               game_over(S,P),
-               nl,play.
+               game_over(S,P).
 
 
-game_over(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               ').
-game_over(S,c):- nl,write('              Computer Won!             ').
-game_over(S,P):- nl,write('              Player '),playerID(P,N),write(N),write(' Won!             ').
+game_over(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               '),nl,nl, returnToMenu.
+game_over(S,c):- nl,write('              Computer Won!             '),nl,nl, returnToMenu.
+game_over(S,P):- nl,write('              Player '),playerID(P,N),write(N),write(' Won!             '),nl,nl, returnToMenu.
 
 
 handleN(S,P,X):- true.               
