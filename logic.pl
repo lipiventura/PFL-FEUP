@@ -9,10 +9,14 @@ rowSelection(Row):- write('Insert Row '),
 
 columnSelection(Column):- write('Insert Column '),
                           read(Input),
+                          (number(Input) -> 
                           ((Input >= 1, Input =< 8) ->
                           Column is Input;
                           nl,write('Insert Column Again (Correctly) '),
+                          columnSelection(Column));
+                          nl,write('Insert Column Again (Correctly) '),
                           columnSelection(Column)).
+
 
 %Replace Elements
 
@@ -90,6 +94,11 @@ masterRule(S,Row,Column,P,P2):- checkAll(S,Row,Column,P2);
                                 \+ checkAll(S,Row,Column,P2), \+ checkAll(S,Row,Column,P).
 
 
-
-
+%Proceed
+canProceed(S):- write('Insert \'n\' to Proceed '),
+                read(Input),
+                (Input = 'n' ->
+                true;
+                nl,write('Insert \'n\' to Proceed (Correctly) '),
+                canProceed(S)).
 

@@ -121,4 +121,5 @@ showTopBoardOpt2(S,2):- nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
             listOfAll(S,SNew,p2,p1,X),
+            canProceed(S),
             showTopBoardOpt2(SNew,1).
