@@ -32,6 +32,9 @@ display_game(S):-
 display_game_AI(S):-
         showTopBoardOpt2(S,1).
 
+display_game_only_AI(S):-
+        showTopBoardOpt3(S,1).
+
 
 showTopBoard(S,1):- nl,
             write('           Player '), write(1), write(' Playing'),nl, 
@@ -88,8 +91,7 @@ handleN(S,P,0):- nl,write('               Game Over!                 '),nl,
                game_over(S,P).
 
 
-game_over(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               '),nl,nl, returnToMenu.
-game_over(S,c):- nl,write('              Computer Won!             '),nl,nl, returnToMenu.
+game_over(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               ').
 game_over(S,P):- nl,write('              Player '),playerID(P,N),write(N),write(' Won!             '),nl,nl, returnToMenu.
 
 
@@ -122,3 +124,24 @@ showTopBoardOpt2(S,2):- nl,
             listOfAll(S,SNew,p2,p1,X),
             canProceed(S),
             showTopBoardOpt2(SNew,1).
+
+
+showTopBoardOpt3(S,1):- nl,
+            write('           Computer 1 Playing'),nl, 
+            write('                                    '),nl,
+            write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
+            write('---|---|---|---|---|---|---|---|---|'),nl,
+            showArcade(1,S),nl,
+            listOfAll(S,SNew,p1,p2,X),
+            canProceed(S),
+            showTopBoardOpt3(SNew,2).
+
+showTopBoardOpt3(S,2):- nl,
+            write('           Computer 2 Playing'),nl, 
+            write('                                    '),nl,
+            write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
+            write('---|---|---|---|---|---|---|---|---|'),nl,
+            showArcade(1,S),nl,
+            listOfAll(S,SNew,p2,p1,X),
+            canProceed(S),
+            showTopBoardOpt3(SNew,1).
