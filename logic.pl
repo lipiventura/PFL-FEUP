@@ -103,9 +103,9 @@ canProceed(S):- write('Insert \'n\' to Proceed '),
                 canProceed(S)).
 
 %Return to Menu
-returnToMenu:- write('Insert \'r\' to Return to the Menu Screen'),
+returnToMenu:- write('Insert \'n\' to Return to the Menu Screen'),
                read(Input),
-               (Input = 'r' ->
+               (Input = 'n' ->
                 true;
                 nl, write('Going Back to the Menu Screen')   ) ,
                 play.
