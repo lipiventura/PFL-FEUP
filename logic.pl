@@ -116,7 +116,7 @@ valid_moves(S,L):- playableColumnAI(S,1,1,p1,p2,[],L2),
 
 %esencial para saber se houve empate, vê em linha específica
 emptyColumn(S,Row,9,Value).
-emptyColumn(S,Row,Column,Value):- checkBoard(S,Row,Column,Value),
+emptyColumn(S,Row,Column,Value):- checkBoardAI(S,Row,Column,Value),
                                   Column1 is Column + 1,
                                   emptyColumn(S,Row,Column1,Value).
 

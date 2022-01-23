@@ -24,9 +24,9 @@ final_state(S):- S = [[p1,p1,p2,p2,p2,empty,empty,empty],
         [p2,p2,p2,p2,p2,p2,p2,empty],
         [p1,p1,p1,p1,p1,p1,p2,empty],
         [p1,p1,p2,p2,p2,p1,p2,empty],
-        [p1,p1,p1,p2,p1,p2,p1,p2],
-        [empty,p1,p1,p1,p1,p1,p1,p2],
-        [p2,p1,p1,p2,p1,p1,p1,p2]].
+        [p1,p1,p1,p2,p1,p2,p1,empty],
+        [empty,p1,p1,p1,p1,p1,p1,empty],
+        [p1,p1,p1,p2,p1,p1,p1,p2]].
 
 %display do jogo player vs player
 display_game(S):-
@@ -49,7 +49,7 @@ showTopBoard(S,1):- nl,
         write('---|---|---|---|---|---|---|---|---|'),nl,
         showArcade(1,S),nl,
         valid_moves(S,[H|T]),
-        handlePlayerList(S,P,H),       
+        handlePlayerList(S,p1,H),       
         doChanging(S,SNew,p1,p2),
         showTopBoard(SNew,2).
 
@@ -62,7 +62,7 @@ showTopBoard(S,2):- nl,
         write('---|---|---|---|---|---|---|---|---|'),nl,
         showArcade(1,S),nl,
         valid_moves(S,[H|T]),
-        handlePlayerList(S,P,T),
+        handlePlayerList(S,p2,T),
         doChanging(S,SNew,p2,p1),
         showTopBoard(SNew,1).
 
@@ -75,7 +75,7 @@ showTopBoardOpt2(S,Level,1):- nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
             valid_moves(S,[H|T]),
-            handlePlayerList(S,P,H),
+            handlePlayerList(S,p1,H),
             doChanging(S,SNew,p1,p2),
             showTopBoardOpt2(SNew,Level,2).
 
