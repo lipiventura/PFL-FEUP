@@ -10,7 +10,7 @@ Maria Francisca Almeida - up201806398
 
 ## Instalation and Execution
 To run our game, you need to follow these very simple steps:
-1. Open SICStus;
+1. Open SICStus Prolog comand line;
 2. In the file menu, choose option 'Consult' and choose the game.pl file;
 3. type 'play.' in the SICStus console;
 4. Choose the game mode and have fun.
@@ -88,7 +88,7 @@ The game ended with the victory of player 2 and a message appears so the players
 ![image](https://user-images.githubusercontent.com/39671616/148706111-d2d41cf4-3c49-40b2-8284-b4646ba09c68.png)
 
 ### How to Move
-To choose your move, you simply have to follow the instructions printed on the console. The console will print a message asking for you to choose the Row and Column where you want to play, through doChange/4. This function calls RowSelection/1, ColumnSelection/1 and masterRule/5 to check if your move is valid. If your move is out of bounds or is an invalid move, the application will ask you to choose again. After that, the function changeBoard/5 is invoked to register yout move in the board.
+Versus Computer: to choose your move, you simply have to follow the instructions printed on the console. The console will print a message asking for you to choose the Row and Column where you want to play, through doChange/4. This function calls RowSelection/1, ColumnSelection/1 and masterRule/5 to check if your move is valid. If your move is out of bounds or is an invalid move, the application will ask you to choose again. After that, the function changeBoard/5 is invoked to register your move in the board.
 
 ### End of Game
 
@@ -109,7 +109,7 @@ To check if a move is valid, we use the function check/5 that evaluates the boar
 To implement the Computer's moves, we used the previously described functions to list all the possible moves for the computer. According to the level we're in, the computer will choose the move. In the "easy" level, the computer just chooses a random move in the available moves. But the next level is a little more complicated. In this level, the AI evaluates the number of moves left, i.e., for each available play, the AI evaluates the moves his opponent has left, choosing to play in the spot that leaves fewer options to the opponent.
 
 ## Conclusion
-The board game Mitozo was succesfully developed in the Prolog Language. We can play against another player (Player vs Player) or against the "Computer" (Player vs Computer), since an autonomous player has been implemented with dificulty levels.
+The board game Mitozo was succesfully developed in the Prolog Language. We can play against another player (Player vs Player) or against the "Computer" (Player vs Computer), since an autonomous player has been implemented with dificulty levels. And if you want, you can watch the computer playing against itself (Computer vs Computer).
 However, this work turned to be quite a challenge due to the fact that Prolog differs from the usual imperative programming. Nevertheless, we are now a step closer to become great programmers due to our incresead knowledge in the Prolog Language.
 
 
