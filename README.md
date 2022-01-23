@@ -6,6 +6,8 @@ Diogo Martins - up201806280
 
 Manuel Moreira - up201402718
 
+Maria Francisca Almeida - up201806398
+
 ## Instalation and Execution
 
 ## Game Description
@@ -93,11 +95,15 @@ We keep the game loop going while there are still moves left to play using anoth
 ![gameNotOver](https://user-images.githubusercontent.com/39671616/150496717-9735d2f7-47d7-4df6-ba00-5b2e5e58e13a.PNG)
 
 ### List of Valid Moves
+To check if a move is valid, we use the function check/5 that evaluates the board (through masterRule/5 and checkboard/4). In masterRule/5, we use the function checkAll/4 to check if a move is valid according to the game rules. Then with checkBoard/4, we check the value of the place where we want to play (if it's empty and checks the master Rule).
 
 ### Evaluation of the Game State
 
 ### Computer's Move
+To implement the Computer's moves, we used the previously described functions to list all the possible moves for the computer. According to the level we're in, the computer will choose the move. In the "easy" level, the computer just chooses a random move in the available moves. But the next level is a little more complicated.
 
 ## Conclusion
+The board game Mitozo was succesfully developed in the Prolog Language. We can play against another player (Player vs Player) or against the "Computer" (Player vs Computer), since an autonomous player has been implemented with dificulty levels.
+However, this work turned to be quite a challenge due to the fact that Prolog differs from the usual imperative programming. Nevertheless, we are now a step closer to become great programmers due to our incresead knowledge in the Prolog Language.
 
 
