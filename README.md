@@ -24,13 +24,13 @@ Starting with an empty board, both players take turns in placing one piece on th
 The game ends when it is impossible for a player to place a piece anywhere on the board following the rule previously mentioned before the board is full.
 
 ### Menu
-After calling the play/0 predicate, our application displays a main menu with the following options:
-![main_menu](https://user-images.githubusercontent.com/50628491/150694824-ac350ab0-a0c5-4629-8677-749de55c2d87.png)
-In the first 5 options, you can choose the game mode, alongside the difficulty of the Computer, and in the 6th option, you can choose Demo versions to fast forward the game:
-![demo_menu](https://user-images.githubusercontent.com/50628491/150696127-b6863806-2667-40d4-aa07-31156287cc3a.png)
-For example, if you choose the option 'Final state (C vs C)', the application will show you a board with a final state of the game.
-![image](https://user-images.githubusercontent.com/50628491/150696302-59e7f435-3fc7-447b-857e-f0c4801c7c0e.png)
-We used the Demo option to, mainly, evaluate our game_over function and to check if, towards the end, our game was still function.
+After calling the play/0 predicate, our application displays a main menu with the following options: <br>
+![main_menu](https://user-images.githubusercontent.com/50628491/150694824-ac350ab0-a0c5-4629-8677-749de55c2d87.png) <br>
+In the first 5 options, you can choose the game mode, alongside the difficulty of the Computer, and in the 6th option, you can choose Demo versions to fast forward the game: <br>
+![demo_menu](https://user-images.githubusercontent.com/50628491/150696127-b6863806-2667-40d4-aa07-31156287cc3a.png) <br>
+For example, if you choose the option 'Final state (C vs C)', the application will show you a board with a final state of the game. <br>
+![image](https://user-images.githubusercontent.com/50628491/150696302-59e7f435-3fc7-447b-857e-f0c4801c7c0e.png) <br>
+We used the Demo option to, mainly, evaluate our game_over function and to check if, towards the end, our game was still function. <br>
 Finally, by choosing option 7, you can go back to main menu if you are in the Demo menu and to exit our application if you are in the main menu.
 
 ## Game Logic
