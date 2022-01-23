@@ -41,15 +41,6 @@ masterRuleAI(S,Row,Column,P,P2):- checkAllAI(S,Row,Column,P2);
                                 \+ checkAllAI(S,Row,Column,P2), \+ checkAllAI(S,Row,Column,P).
 
 
-%choose_move(S, Move):- valid_moves(S, Move),
-%                       play_move(Level, S, Moves, Move).
-
-%valid_moves(S, Moves):-
-%            findall(Row-Column, check_bound(S, Row, Column, Value), Moves).
-
-%play_move(1,S,Moves, Move):-random_select(Move, Moves, Rest).
-
-
 playableColumnAI(S,Row,9,P1,P2,L1,L1).
 playableColumnAI(S,Row,9,P1,P2,L1,L2):- playableColumnAI(S,Row,9,P1,P2,L1,L1).
 playableColumnAI(S,Row,Column,P1,P2,L1,L2):- check(S,Row,Column,P1,P2),
@@ -71,8 +62,34 @@ listOfAll(S,SNew,P,P2,X):- playableColumnAI(S,1,1,P,P2,[],L2),
                     playableColumnAI(S,8,1,P,P2,L8,L9),
                     X = L9, handleList(S,SNew,P,X).
 
+valid_moves(S,L):- playableColumnAI(S,1,1,p1,p2,[],L2),
+                   playableColumnAI(S,2,1,p1,p2,L2,L3),
+                   playableColumnAI(S,3,1,p1,p2,L3,L4),
+                   playableColumnAI(S,4,1,p1,p2,L4,L5),
+                   playableColumnAI(S,5,1,p1,p2,L5,L6),
+                   playableColumnAI(S,6,1,p1,p2,L6,L7),
+                   playableColumnAI(S,7,1,p1,p2,L7,L8),
+                   playableColumnAI(S,8,1,p1,p2,L8,L9),
+                   LP1 = L9,
+                   playableColumnAI(S,1,1,p2,p1,[],M2),
+                   playableColumnAI(S,2,1,p2,p1,M2,M3),
+                   playableColumnAI(S,3,1,p2,p1,M3,M4),
+                   playableColumnAI(S,4,1,p2,p1,M4,M5),
+                   playableColumnAI(S,5,1,p2,p1,M5,M6),
+                   playableColumnAI(S,6,1,p2,p1,M6,M7),
+                   playableColumnAI(S,7,1,p2,p1,M7,M8),
+                   playableColumnAI(S,8,1,p2,p1,M8,M9),
+                   LP2 = M9,
+                   L = [LP1|LP2].
+
+move(S,[H1|H2],SNew,P):- Row is H1, Column is H2, changeBoard(S,SNew,Row,Column,P).
+
 handleList(S,SNew,P,[]):- nl,write('               Game Over!                 '),nl, inverse(P,P2), game_over(S,P2),nl,play.
-handleList(S,SNew,P,[[H1|H2]|T]):-  Row is H1, Column is H2, changeBoard(S,SNew,Row,Column,P).
+handleList(S,SNew,P,[H|T]):- move(S,H,SNew,P). 
+
 
 inverse(p1,P):- P = p2.
 inverse(p2,P):- P = p1.
+
+choose_move(S,1,[H|T]):- valid_moves(S,[H|T]).
+choose_move(S,2,[H|T]):- valid_moves(S,[H|T]).
