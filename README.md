@@ -100,7 +100,7 @@ To check if a move is valid, we use the function check/5 that evaluates the boar
 ### Evaluation of the Game State
 
 ### Computer's Move
-To implement the Computer's moves, we used the previously described functions to list all the possible moves for the computer. According to the level we're in, the computer will choose the move. In the "easy" level, the computer just chooses a random move in the available moves. But the next level is a little more complicated.
+To implement the Computer's moves, we used the previously described functions to list all the possible moves for the computer. According to the level we're in, the computer will choose the move. In the "easy" level, the computer just chooses a random move in the available moves. But the next level is a little more complicated. In this level, the AI evaluates the number of moves left, i.e., for each available play, the AI evaluates the moves his opponent has left, choosing to play in the spot that leaves fewer options to the opponent.
 
 ## Conclusion
 The board game Mitozo was succesfully developed in the Prolog Language. We can play against another player (Player vs Player) or against the "Computer" (Player vs Computer), since an autonomous player has been implemented with dificulty levels.
