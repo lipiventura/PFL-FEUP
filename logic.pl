@@ -81,7 +81,7 @@ masterRuleAI(S,Row,Column,P,P2):- checkAllAI(S,Row,Column,P2);
                                 \+ checkAllAI(S,Row,Column,P2), \+ checkAllAI(S,Row,Column,P).
 
 
-%vê quais os valid moves numa linha específica
+%vê quais os valid moves numa linha específica e faz append dos moves válidos
 playableColumnAI(S,Row,9,P1,P2,L1,L1).
 playableColumnAI(S,Row,9,P1,P2,L1,L2):- playableColumnAI(S,Row,9,P1,P2,L1,L1).
 playableColumnAI(S,Row,Column,P1,P2,L1,L2):- checkAI(S,Row,Column,P1,P2),
@@ -92,7 +92,7 @@ playableColumnAI(S,Row,Column,P1,P2,L1,L2):- checkAI(S,Row,Column,P1,P2),
                                      Column1 is Column + 1,
                                      playableColumnAI(S,Row,Column1,P1,P2,L1,L2).
 
-%obtém a lista de valid_moves para os 2 jogadores 
+%obtém a lista de valid_moves para os 2 jogadores fazendo append linha a linha para cada
 valid_moves(S,L):- playableColumnAI(S,1,1,p1,p2,[],L2),
                    playableColumnAI(S,2,1,p1,p2,L2,L3),
                    playableColumnAI(S,3,1,p1,p2,L3,L4),

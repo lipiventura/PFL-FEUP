@@ -9,7 +9,7 @@ move(S,[H1|H2],SNew,P):- Row is H1, Column is H2, changeBoard(S,SNew,Row,Column,
 handleList(S,SNew,Level,P,[]):- nl,write('               Game Over!                 '),nl, inverse(P,P2), game_over(S,P2),nl.
 handleList(S,SNew,1,P,[H|T]):- move(S,H,SNew,P). 
 
-%Nível 2 de AI
+%Nível 2 de AI, 64 é 8 x 8 (número maximo de jogadas possiveis)
 handleList(S,SNew,2,P,L):- checkBestOption(S,SNew,L,P,64,M1).
 
 %obtém-se jogador adversário com base no que está a jogar
@@ -19,10 +19,12 @@ inverse(p2,P):- P = p1.
 %para cada posição, vê lista valid moves caso fosse desempenhada
 checkBestOption(S,SNew,[],P,64,M1):- move(S,M1,SNew,P).
 checkBestOption(S,SNew,[H],P,64,M1):- move(S,H,SNew,P).
+%para jogador 1, no qual interessa a tail do que devolve a lista de valid moves 
 checkBestOption(S,SNew,[H|T],p1,N,M1):- move(S,H,S2,p1),
                                   valid_moves(S2,[H2|T2]),
                                   countList(T2,N2),
                                   bestOptions(S,SNew,T,p1,N,N2,M1,H).
+%para jogador 2, no qual interessa a head do que devolve a lista de valid moves 
 checkBestOption(S,SNew,[H|T],p2,N,M1):- move(S,H,S2,p2),
                                   valid_moves(S2,[H2|T2]),
                                   countList(H2,N2),
