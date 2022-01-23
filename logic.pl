@@ -4,6 +4,8 @@ rowSelection(Row):- write('Insert Row '),
                     read(Input),
                     (alphabet(Input,R) ->
                     Row is R;
+                    Input = 'r' ->
+                    play;
                     nl,write('Insert Row Again (Correctly) '),
                     rowSelection(Row)).
 
@@ -14,6 +16,8 @@ columnSelection(Column):- write('Insert Column '),
                           Column is Input;
                           nl,write('Insert Column Again (Correctly) '),
                           columnSelection(Column));
+                          Input = 'r' ->
+                          play;
                           nl,write('Insert Column Again (Correctly) '),
                           columnSelection(Column)).
 
@@ -99,6 +103,8 @@ canProceed(S):- write('Insert \'n\' to Proceed '),
                 read(Input),
                 (Input = 'n' ->
                 true;
+                Input = 'r' ->
+                play;
                 nl,write('Insert \'n\' to Proceed (Correctly) '),
                 canProceed(S)).
 
