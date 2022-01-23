@@ -31,7 +31,7 @@ In the first 5 options, you can choose the game mode, alongside the difficulty o
 For example, if you choose the option 'Final state (C vs C)', the application will show you a board with a final state of the game. <br>
 ![image](https://user-images.githubusercontent.com/50628491/150696302-59e7f435-3fc7-447b-857e-f0c4801c7c0e.png) <br>
 We used the Demo option to, mainly, evaluate our game_over function and to check if, towards the end, our game was still function. <br>
-Finally, by choosing option 7, you can go back to main menu if you are in the Demo menu and to exit our application if you are in the main menu.
+Finally, by choosing option 7, you can either go back to main menu if you are in the Demo menu and to exit our application if you are in the main menu.
 
 ## Game Logic
 
@@ -111,9 +111,10 @@ Mitozo ends when the board is full (draw) or a player cannot make a move on his 
 
 ![game_over](https://user-images.githubusercontent.com/39671616/150495941-65767106-f62b-478c-9975-4d943f28e295.PNG)
 
-We keep the game loop going while there are still moves left to play using another preicate called gameNotOver(GameState, Player, Player). When this predicate returns false, the game loop stops and calls the predicate game_over via a handler.
+We keep the game loop going while there are still moves left to play using the preicate called valid_moves/2. When this functions returns an empty list, then there are no more possible moves, meaning the game is over.<br>
 
-![gameNotOver](https://user-images.githubusercontent.com/39671616/150496717-9735d2f7-47d7-4df6-ba00-5b2e5e58e13a.PNG)
+![image](https://user-images.githubusercontent.com/50628491/150696580-3bf3e1b5-8ece-448a-b6b9-2472efb12741.png)
+
 
 ### List of Valid Moves
 
