@@ -88,9 +88,11 @@ The game ended with the victory of player 2 and a message appears so the players
 ![image](https://user-images.githubusercontent.com/39671616/148706111-d2d41cf4-3c49-40b2-8284-b4646ba09c68.png)
 
 ### How to Move
-To choose your move, you simply have to follow the instructions printed on the console. The console will print a message asking for you to choose the Row and Column where you want to play. After the marterRule is verified, the program calls the predicate move(GameState, Move, NewGameState, Player). This function calls changeBoard/5 to register your move in the board.
+Against Computer:To choose your move, you simply have to follow the instructions printed on the console. The console will print a message asking for you to choose the Row and Column where you want to play. After the marterRule is verified, the program calls the predicate move(GameState, Move, NewGameState, Player). This function calls changeBoard/5 to register your move in the board.
 
 ![move](https://user-images.githubusercontent.com/39671616/150687484-af19398e-b15e-45e4-b497-7580a23bf0e4.PNG)
+
+Against Player:
 
 
 ### End of Game
@@ -111,6 +113,7 @@ The list of valid moves is created by the predicate valid_moves(GameState, Moves
 
 
 ### Evaluation of the Game State
+We evaluate the Game State using two functions. First we use valid_moves/2 to obtain a list of every possible play for the two players, keeping them in the L parameter. Then, with checkBestOption/6 we check the number of moves left for each play available in L.
 
 
 ### Computer's Move
