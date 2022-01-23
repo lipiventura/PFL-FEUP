@@ -29,8 +29,8 @@ final_state(S):- S = [[p1,p1,p2,p2,p2,empty,empty,empty],
 display_game(S):-
         showTopBoard(S,1).
 
-display_game_AI(S):-
-        showTopBoardOpt2(S,1).
+display_game_AI(S,Level):-
+        showTopBoardOpt2(S,Level,1).
 
 display_game_only_AI(S):-
         showTopBoardOpt3(S,1).
@@ -100,19 +100,15 @@ gameNotOverVSAI(S,P,P2):- playableColumn(S,1,1,P,P2,0,N2),
                 N14 is N13 + N7,N15 is N14 + N8,
                 X is N15 + N9,handleAI(S,P2,X).
 
-handleN(S,P,0):- nl,write('               Game Over!                 '),nl,
-        game_over(S,P).
 
-handleAI(S,P,0):- nl,write('               Game Over!                 '),nl,
-                game_over_AI(S,P).
+handleN(S,P,0):- nl,write('               Game Over!                 '),nl, game_over(S,P).
+handleN(S,P,X):- true.     
 
-
-game_over(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               ').
+game_over(S,P):- emptyRow(S,1,1,empty), nl,write('               It\'s a Tie!               '),nl,nl, returnToMenu.
 game_over(S,P):- nl,write('              Player '),playerID(P,N),write(N),write(' Won!             '),nl,nl, returnToMenu.
 game_over_AI(S,P):- nl,write('              Computer Won!             '),nl,nl, returnToMenu.
 
-handleN(S,P,X):- true. 
-handleAI(S,P,X):- true.             
+
 
 doChanging(S,SNew,P,P2):- repeat,
                 rowSelection(Row),
@@ -122,43 +118,47 @@ doChanging(S,SNew,P,P2):- repeat,
 
 
 
-showTopBoardOpt2(S,1):- nl,
-        write('           Player '), write(1), write(' Playing'),nl, 
-        write('                                    '),nl,
-        write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
-        write('---|---|---|---|---|---|---|---|---|'),nl,
-        showArcade(1,S),nl,
-        gameNotOverVSAI(S,p1,p2),
-        doChanging(S,SNew,p1,p2),
-        showTopBoardOpt2(SNew,2).
+showTopBoardOpt2(S,Level,1):- nl,
+            write('           Player '), write(1), write(' Playing'),nl, 
+            write('                                    '),nl,
+            write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
+            write('---|---|---|---|---|---|---|---|---|'),nl,
+            showArcade(1,S),nl,
+            gameNotOver(S,p1,p2),
+            doChanging(S,SNew,p1,p2),
+            showTopBoardOpt2(SNew,Level,2).
 
-showTopBoardOpt2(S,2):- nl,
-        write('           Computer Playing'),nl, 
-        write('                                    '),nl,
-        write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
-        write('---|---|---|---|---|---|---|---|---|'),nl,
-        showArcade(1,S),nl,
-        listOfAll(S,SNew,p2,p1,X),
-        canProceed(S),
-        showTopBoardOpt2(SNew,1).
+
+showTopBoardOpt2(S,Level,2):- nl,
+            write('           Computer Playing'),nl, 
+            write('                                    '),nl,
+            write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
+            write('---|---|---|---|---|---|---|---|---|'),nl,
+            showArcade(1,S),nl,
+            choose_move(S,Level,[H|T]),
+            handleList(S,SNew,Level,p2,T),
+            canProceed(S),
+            showTopBoardOpt2(SNew,Level,1).
 
 
 showTopBoardOpt3(S,1):- nl,
-        write('           Computer 1 Playing'),nl, 
-        write('                                    '),nl,
-        write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
-        write('---|---|---|---|---|---|---|---|---|'),nl,
-        showArcade(1,S),nl,
-        listOfAll(S,SNew,p1,p2,X),
-        canProceed(S),
-        showTopBoardOpt3(SNew,2).
+            write('           Computer 1 Playing'),nl, 
+            write('                                    '),nl,
+            write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
+            write('---|---|---|---|---|---|---|---|---|'),nl,
+            showArcade(1,S),nl,
+            valid_moves(S,[H|T]),
+            handleList(S,SNew,1,p1,H),
+            canProceed(S),
+            showTopBoardOpt3(SNew,2).
 
 showTopBoardOpt3(S,2):- nl,
-        write('           Computer 2 Playing'),nl, 
-        write('                                    '),nl,
-        write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
-        write('---|---|---|---|---|---|---|---|---|'),nl,
-        showArcade(1,S),nl,
-        listOfAll(S,SNew,p2,p1,X),
-        canProceed(S),
-        showTopBoardOpt3(SNew,1).
+            write('           Computer 2 Playing'),nl, 
+            write('                                    '),nl,
+            write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
+            write('---|---|---|---|---|---|---|---|---|'),nl,
+            showArcade(1,S),nl,
+            valid_moves(S,[H|T]),
+            handleList(S,SNew,1,p2,T),
+            canProceed(S),
+            showTopBoardOpt3(SNew,1).
