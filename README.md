@@ -113,7 +113,7 @@ The list of valid moves is created by the predicate valid_moves(GameState, Moves
 
 
 ### Evaluation of the Game State
-We evaluate the Game State using two functions. First we use valid_moves/2 to obtain a list of every possible play for the two players, keeping them in the L parameter. Then, with checkBestOption/6 we check the number of moves left for each play available in L.
+We evaluate the Game State using two functions. First we use valid_moves/2 to obtain a list of every possible play for the two players, keeping them in the L parameter. Then, with checkBestOption/6 we check the number of moves left to de opponent for each play available in L.
 
 
 ### Computer's Move
@@ -123,9 +123,10 @@ To implement the Computer's moves, we used valid_moves/2 to list all the possibl
 
 
 
-
 ## Conclusion
 The board game Mitozo was succesfully developed in the Prolog Language. We can play against another player (Player vs Player) or against the "Computer" (Player vs Computer), since an autonomous player has been implemented with dificulty levels. And if you want, you can watch the computer playing against itself (Computer vs Computer).
 However, this work turned to be quite a challenge due to the fact that Prolog differs from the usual imperative programming. Nevertheless, we are now a step closer to become great programmers due to our incresead knowledge in the Prolog Language.
 
-
+## Bibliography
+Mitozo game - https://boardgamegeek.com/boardgame/338168/mitozo
+Prolog help - https://swi-prolog.org
