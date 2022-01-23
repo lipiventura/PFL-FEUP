@@ -38,16 +38,16 @@ During the game, if you want to quit and go back to the main menu, you only need
 
 ### Internal Representation of the Game State
 
-We represent the game state with a list of lists that have the same dimensions of the board Mitozo in played in (8x8).
+We represent the game state with a list of lists that have the same dimensions of the board Mitozo played in (8x8).
 
 Each row of the board has three different states.
 It can be empty, wich means there are no pieces on that square at the moment, a p1 that represents player 1 and a p2 that represents player 2.
 
-In the next three subsections we have the internal state representation ate different moments of the game.
+In the next three subsections we have the internal state representation at different moments of the game.
 
 #### Initial Representation
 
-The predicate responsible for the drawing of the board is called display_game(+GameState) calling another predicate to draw every line of the board. Mitozo is a game played only in an eight by eight board, so we don't have the need to have varying sizes of the board.
+The predicate responsible for the drawing of the board is called display_game(+GameState), that calls another predicate to draw every line of the board. Mitozo is a game played only in an eight by eight board, so we don't have the need to have different sizes of the board.
 
 ![display_game](https://user-images.githubusercontent.com/39671616/150494666-90d954f8-5db3-40b9-aa90-7bc8cb83e2a3.PNG)
 
@@ -94,12 +94,12 @@ The intermidiate state we chose is seen by the user as follows.
 
 #### Final Board Visualization
 
-The game ended with the victory of player 2 and a message appears so the players can know the game ended and who won.
+The game ended with the victory of player 2 and a message appears so the players can know the game is over and who won.
 
 ![image](https://user-images.githubusercontent.com/39671616/148706111-d2d41cf4-3c49-40b2-8284-b4646ba09c68.png)
 
 ### How to Move
-Against Computer: To choose your move, you simply have to follow the instructions printed on the console. The console will print a message asking for you to choose the Row and Column where you want to play. After the marterRuleAI/5 is verified, the program calls the predicate move(+GameState, +Move, -NewGameState, +Player). This function calls changeBoard/5 to register your move in the board.
+Against Computer: To choose your move, you simply have to follow the instructions printed on the console. The console will print a message asking for you to choose the Row and Column where you want to play. After the masterRuleAI/5 is verified, the program calls the predicate move(+GameState, +Move, -NewGameState, +Player). This function calls changeBoard/5 to register your move in the board.
 
 ![move](https://user-images.githubusercontent.com/39671616/150687484-af19398e-b15e-45e4-b497-7580a23bf0e4.PNG)
 
@@ -112,7 +112,7 @@ Mitozo ends when the board is full (draw) or a player cannot make a move on his 
 
 ![game_over](https://user-images.githubusercontent.com/39671616/150495941-65767106-f62b-478c-9975-4d943f28e295.PNG)
 
-We keep the game loop going while there are still moves left to play using the predicate called valid_moves/2. When this functions returns an empty list, then there are no more possible moves, meaning the game is over, which is detected by predicate handleList/5 when the player that looses is the Computer, and handlePlayerList/5. Both of them call the game_over/2 predicate mentioned.
+We keep the game loop going while there are still moves left to play using the predicate called valid_moves/2. When this functions returns an empty list, then there are no more possible moves, meaning the game is over, which is detected by predicate handleList/5 when the player that looses is the Computer, and handlePlayerList/5 for the P vs P mode. Both of them call the game_over/2 predicate mentioned.
 
 ### List of Valid Moves
 
