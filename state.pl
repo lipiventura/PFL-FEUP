@@ -32,8 +32,8 @@ display_game(S):-
 display_game_AI(S,Level):-
         showTopBoardOpt2(S,Level,1).
 
-display_game_only_AI(S):-
-        showTopBoardOpt3(S,1).
+display_game_only_AI(S,Level):-
+        showTopBoardOpt3(S,Level,1).
 
 
 showTopBoard(S,1):- nl,
@@ -141,24 +141,24 @@ showTopBoardOpt2(S,Level,2):- nl,
             showTopBoardOpt2(SNew,Level,1).
 
 
-showTopBoardOpt3(S,1):- nl,
+showTopBoardOpt3(S,Level,1):- nl,
             write('           Computer 1 Playing'),nl, 
             write('                                    '),nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
-            valid_moves(S,[H|T]),
-            handleList(S,SNew,1,p1,H),
+            choose_move(S,Level,[H|T]),
+            handleList(S,SNew,Level,p1,H),
             canProceed(S),
-            showTopBoardOpt3(SNew,2).
+            showTopBoardOpt3(SNew,Level,2).
 
-showTopBoardOpt3(S,2):- nl,
+showTopBoardOpt3(S,Level,2):- nl,
             write('           Computer 2 Playing'),nl, 
             write('                                    '),nl,
             write('   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |'),nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
-            valid_moves(S,[H|T]),
-            handleList(S,SNew,1,p2,T),
+            choose_move(S,Level,[H|T]),
+            handleList(S,SNew,Level,p2,T),
             canProceed(S),
-            showTopBoardOpt3(SNew,1).
+            showTopBoardOpt3(SNew,Level,1).
