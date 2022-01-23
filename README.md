@@ -12,7 +12,7 @@ Maria Francisca Almeida - up201806398
 To run our game, you need to follow these very simple steps:
 1. Open SICStus;
 2. In the file menu, choose option 'Consult' and choose the game.pl file;
-3. type 'play.' in the SICStus terminal;
+3. type 'play.' in the SICStus console;
 4. Choose the game mode and have fun.
 
 ## Game Description
@@ -88,6 +88,7 @@ The game ended with the victory of player 2 and a message appears so the players
 ![image](https://user-images.githubusercontent.com/39671616/148706111-d2d41cf4-3c49-40b2-8284-b4646ba09c68.png)
 
 ### How to Move
+To choose your move, you simply have to follow the instructions printed on the console. The console will print a message asking for you to choose the Row and Column where you want to play, through doChange/4. This function calls RowSelection/1, ColumnSelection/1 and masterRule/5 to check if your move is valid. If your move is out of bounds or is an invalid move, the application will ask you to choose again. After that, the function changeBoard/5 is invoked to register yout move in the board.
 
 ### End of Game
 
