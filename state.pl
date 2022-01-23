@@ -121,7 +121,7 @@ showTopBoardOpt2(S,Level,2):- nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
             choose_move(S,Level,[H|T]),
-            handleList(S,SNew,p2,T),
+            handleList(S,SNew,Level,p2,T),
             canProceed(S),
             showTopBoardOpt2(SNew,Level,1).
 
@@ -133,7 +133,7 @@ showTopBoardOpt3(S,1):- nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
             valid_moves(S,[H|T]),
-            handleList(S,SNew,p1,H),
+            handleList(S,SNew,1,p1,H),
             canProceed(S),
             showTopBoardOpt3(SNew,2).
 
@@ -144,6 +144,6 @@ showTopBoardOpt3(S,2):- nl,
             write('---|---|---|---|---|---|---|---|---|'),nl,
             showArcade(1,S),nl,
             valid_moves(S,[H|T]),
-            handleList(S,SNew,p2,T),
+            handleList(S,SNew,1,p2,T),
             canProceed(S),
             showTopBoardOpt3(SNew,1).

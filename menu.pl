@@ -6,7 +6,7 @@ menu:- showMenu,
 optionMenu(1):- final_state(S), display_game(S).
 optionMenu(2):- final_state(S), display_game_AI(S,1).
 optionMenu(3):- final_state(S), display_game_AI(S,2).
-optionMenu(4):- final_state(S), display_game_only_AI(S).
+optionMenu(4):- intermidiate_state(S), display_game_only_AI(S).
 optionMenu(5):- demoMenu.
 optionMenu(6):- abort.
 optionMenu(A):- nl,write('Insert a Valid Option '),read(Input),optionMenu(Input).
