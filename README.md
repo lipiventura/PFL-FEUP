@@ -111,10 +111,7 @@ Mitozo ends when the board is full (draw) or a player cannot make a move on his 
 
 ![game_over](https://user-images.githubusercontent.com/39671616/150495941-65767106-f62b-478c-9975-4d943f28e295.PNG)
 
-We keep the game loop going while there are still moves left to play using the preicate called valid_moves/2. When this functions returns an empty list, then there are no more possible moves, meaning the game is over.<br>
-
-![image](https://user-images.githubusercontent.com/50628491/150696580-3bf3e1b5-8ece-448a-b6b9-2472efb12741.png)
-
+We keep the game loop going while there are still moves left to play using the preicate called valid_moves/2. When this functions returns an empty list, then there are no more possible moves, meaning the game is over.
 
 ### List of Valid Moves
 
