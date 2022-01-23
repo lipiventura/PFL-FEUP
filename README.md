@@ -9,6 +9,11 @@ Manuel Moreira - up201402718
 Maria Francisca Almeida - up201806398
 
 ## Instalation and Execution
+To run our game, you need to follow these very simple steps:
+1. Open SICStus;
+2. In the file menu, choose option 'Consult' and choose the game.pl file;
+3. type 'play.' in the SICStus terminal;
+4. Choose the game mode and have fun.
 
 ## Game Description
 
