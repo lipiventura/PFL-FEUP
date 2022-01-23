@@ -92,7 +92,7 @@ Against Computer: To choose your move, you simply have to follow the instruction
 
 ![move](https://user-images.githubusercontent.com/39671616/150687484-af19398e-b15e-45e4-b497-7580a23bf0e4.PNG)
 
-Against Player: The process is similiar to the computer, however the process behind the moves are a little bit diferent.
+Against Player: The process is similiar to the computer, however the process behind the moves are a little bit diferent. We start by calling the function doChanging/4, in which it repeats a cycle unitl the move is not valid. First we use rowSelection/1 and columnSelection/1 for the player to input their move adn checks if the move is out of bounds. If not, then we check if the move is valid in the game rules with masterRule/5. If everything is valid then we execute changeBoard/5 to register your move in the board.
 
 
 ### End of Game
