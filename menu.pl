@@ -1,8 +1,9 @@
+%pede input, menu principal
 menu:- showMenu,
        read(Input),
        optionMenu(Input).
 
-
+%opções de jogo do menu principal
 optionMenu(1):- initial_state(S), display_game(S).
 optionMenu(2):- initial_state(S), display_game_AI(S,1).
 optionMenu(3):- initial_state(S), display_game_AI(S,2).
@@ -12,10 +13,12 @@ optionMenu(6):- demoMenu.
 optionMenu(7):- abort.
 optionMenu(A):- nl,write('Insert a Valid Option '),read(Input),optionMenu(Input).
 
+%pede input, menu demo
 demoMenu:- showDemoMenu,
            read(Input),
            optionDemoMenu(Input).
 
+%opções de jogo do menu da demo
 optionDemoMenu(1):- intermidiate_state(S), display_game(S).
 optionDemoMenu(2):- final_state(S), display_game(S).
 optionDemoMenu(3):- intermidiate_state(S), display_game_AI(S,2).
@@ -25,6 +28,7 @@ optionDemoMenu(6):- final_state(S), display_game_only_AI(S,2).
 optionDemoMenu(7):- menu. 
 optionDemoMenu(A):- nl,write('Insert a Valid Option '),read(Input),optionDemoMenu(Input).
 
+%output do menu principal
 showMenu:- nl,nl, 
                 write(' ----------------------------------------------------------------'),nl,
                 write('|  __    __     __     ______   ______     ______     ______     |'),nl,
@@ -47,7 +51,7 @@ showMenu:- nl,nl,
                 write('|                                                                |'),nl,
                 write(' ----------------------------------------------------------------'),nl,nl.
 
-
+%output do menu da demo
 showDemoMenu:- nl,nl, 
             write(' ----------------------------------------------------------------'),nl,
             write('|  __    __     __     ______   ______     ______     ______     |'),nl,
