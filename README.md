@@ -23,6 +23,8 @@ Starting with an empty board, both players take turns in placing one piece on th
 
 The game ends when it is impossible for a player to place a piece anywhere on the board following the rule previously mentioned before the board is full.
 
+### Menu
+
 ## Game Logic
 
 ### Internal Representation of the Game State
@@ -128,5 +130,5 @@ The board game Mitozo was succesfully developed in the Prolog Language. We can p
 However, this work turned to be quite a challenge due to the fact that Prolog differs from the usual imperative programming. Nevertheless, we are now a step closer to become great programmers due to our incresead knowledge in the Prolog Language.
 
 ## Bibliography
-Mitozo game - https://boardgamegeek.com/boardgame/338168/mitozo
+Mitozo game - https://boardgamegeek.com/boardgame/338168/mitozo <br>
 Prolog help - https://swi-prolog.org
