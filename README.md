@@ -88,7 +88,10 @@ The game ended with the victory of player 2 and a message appears so the players
 ![image](https://user-images.githubusercontent.com/39671616/148706111-d2d41cf4-3c49-40b2-8284-b4646ba09c68.png)
 
 ### How to Move
-To choose your move, you simply have to follow the instructions printed on the console. The console will print a message asking for you to choose the Row and Column where you want to play, through doChange/4. This function calls RowSelection/1, ColumnSelection/1 and masterRule/5 to check if your move is valid. If your move is out of bounds or is an invalid move, the application will ask you to choose again. After that, the function changeBoard/5 is invoked to register yout move in the board.
+To choose your move, you simply have to follow the instructions printed on the console. The console will print a message asking for you to choose the Row and Column where you want to play. After the marterRule is verified, the program calls the predicate move(GameState, Move, NewGameState, Player). This function calls changeBoard/5 to register your move in the board.
+
+![move](https://user-images.githubusercontent.com/39671616/150687484-af19398e-b15e-45e4-b497-7580a23bf0e4.PNG)
+
 
 ### End of Game
 
@@ -101,12 +104,22 @@ We keep the game loop going while there are still moves left to play using anoth
 ![gameNotOver](https://user-images.githubusercontent.com/39671616/150496717-9735d2f7-47d7-4df6-ba00-5b2e5e58e13a.PNG)
 
 ### List of Valid Moves
-To check if a move is valid, we use the function check/5 that evaluates the board (through masterRule/5 and checkboard/4). In masterRule/5, we use the function checkAll/4 to check if a move is valid according to the game rules. Then with checkBoard/4, we check the value of the place where we want to play (if it's empty and checks the master Rule).
+
+The list of valid moves is created by the predicate valid_moves(GameState, Moves). This predicate is similar to the gameNotOver one already presented that checks if there are any valid moves still available to play, but valid_moves also appends them to a list. The move is composed of a column-row pair.
+
+![valid_moves](https://user-images.githubusercontent.com/39671616/150687146-5e07f32f-941a-4288-b115-af28ea1434fd.PNG)
+
 
 ### Evaluation of the Game State
 
+
 ### Computer's Move
-To implement the Computer's moves, we used the previously described functions to list all the possible moves for the computer. According to the level we're in, the computer will choose the move. In the "easy" level, the computer just chooses a random move in the available moves. But the next level is a little more complicated. In this level, the AI evaluates the number of moves left, i.e., for each available play, the AI evaluates the moves his opponent has left, choosing to play in the spot that leaves fewer options to the opponent.
+To implement the Computer's moves, we used valid_moves/2 to list all the possible moves for the computer. According to the level we're in, the computer will choose the move. In the "easy" level, the computer just chooses a random move in the available moves. But the next level is a little more complicated. In this level, the AI evaluates the number of moves left, i.e., for each available play, the AI evaluates the moves his opponent has left, choosing to play in the spot that leaves fewer options to the opponent. To accomplish this, a predicate choose_move(GameState, Level, Move) is needed and calls the list of valid moves to choose from.
+
+![choose_move](https://user-images.githubusercontent.com/39671616/150687609-4c9836d1-6aad-4579-aa44-cefda57ca1b2.PNG)
+
+
+
 
 ## Conclusion
 The board game Mitozo was succesfully developed in the Prolog Language. We can play against another player (Player vs Player) or against the "Computer" (Player vs Computer), since an autonomous player has been implemented with dificulty levels.
